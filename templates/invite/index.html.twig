@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Invite index{% endblock %}
+
+{% block body %}
+    <h1>Invite index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for invite in invites %}
+            <tr>
+                <td>{{ invite.id }}</td>
+                <td>{{ invite.name }}</td>
+                <td>
+                    <a href="{{ path('invite_show', {'id': invite.id}) }}">show</a>
+                    <a href="{{ path('invite_edit', {'id': invite.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('invite_new') }}">Create new</a>
+{% endblock %}

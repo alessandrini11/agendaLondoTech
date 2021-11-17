@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evenement{% endblock %}
+
+{% block body %}
+
+    <div class="w-2/3 mx-auto mt-20">
+        <h1 class="border-l-4 border-blue-500 pl-4 mb-3 text-2xl">Evenement</h1>
+        <p class="px-4 py-3 text-md font-semibold border">{{ evenement.title }}</p>
+        <p class="px-4 py-3 text-md font-semibold border">
+            {% if evenement.priority.name == 'crucial' %}
+                <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">  {{ evenement.priority.name }} </span>
+            {% elseif evenement.priority.name == 'important' %}
+                <span class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-sm">  {{ evenement.priority.name }} </span>
+            {% else %}
+                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">  {{ evenement.priority.name }} </span>
+            {% endif %}
+        </p>
+        <p class="px-4 py-3 text-md font-semibold border">{{ evenement.date ? evenement.date|date('Y M d') : '' }}</p>
+        <p class="mt-10">
+            <a href="/">Retour à l'Acceuil</a>
+        </p>
+    </div>
+{% endblock %}

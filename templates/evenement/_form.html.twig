@@ -1,0 +1,21 @@
+
+    {{ form_start(form) }}
+    <div class="">
+        <label for="">Titre</label>
+        {{ form_row(form.title,{'attr':{'class':'w-full border boder-4 border-black py-1 px-3'}}) }}
+    </div>
+    <div class="my-5">
+        <label for="">Invité(s)</label>
+        {{ form_row(form.invites,{'attr':{'class':'w-full border boder-4 border-black py-1 px-3'}}) }}
+    </div>
+    <div class="my-5">
+        <label for="">Priorité</label>
+        {{ form_row(form.priority,{'attr':{'class':'w-full border boder-4 border-black py-1 px-3'}}) }}
+    </div>
+    <div class="">
+        <label for=""></label>
+        {{ form_row(form.date,{'attr':{'class':'w-full border boder-4 border-black py-1 px-3'}}) }}
+    </div>
+    <button class="mt-2 w-full py-3 px-6 bg-green-500 text-white mb-5">{{ button_label|default('Enregistrer') }}</button>
+    {{ form_end(form) }}
+

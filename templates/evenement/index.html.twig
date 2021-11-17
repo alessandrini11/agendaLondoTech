@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acceuil{% endblock %}
+
+{% block body %}
+    <section class="container mx-auto p-6 font-mono">
+        <h1 class="text-3xl border-l-4 border-blue-500 pl-4 mb-3">Acceuil</h1>
+        <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+            <p class="my-5 flex justify-end">
+                <a class="p-1 px-3 bg-blue-500 text-gray-100 text-lg rounded-lg cursor-pointer focus:border-4 border-blue-300" href="{{ path('evenement_new') }}"><i class="fas fa-plus"></i></a>
+            </p>
+            <div class="w-full overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                    <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                        <th class="px-4 py-3">Evenement</th>
+                        <th class="px-4 py-3">Personne</th>
+                        <th class="px-4 py-3">Priorité</th>
+                        <th class="px-4 py-3">Date</th>
+                        <th class="px-4 py-3">Ajouté Le</th>
+                        <th class="px-4 py-3">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                    {% for evenement in evenements %}
+                    <tr class="text-gray-700">
+                        <td class="px-4 py-3 text-md font-semibold border">{{ evenement.title }}</td>
+                        <td class="px-4 py-3 text-md font-semibold border">
+                            <ul>
+                                {% for invite in evenement.invites  %}
+                                    <li> {{ loop.index }} {{ invite.name }}</li>
+                                {% else %}
+                                    null
+                                {% endfor %}
+                            </ul>
+
+                        </td>
+                        <td class="px-4 py-3 text-xs border">
+                            {% if evenement.priority.name == 'crucial' %}
+                                <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">  {{ evenement.priority.name }} </span>
+                            {% elseif evenement.priority.name == 'important' %}
+                                <span class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-sm">  {{ evenement.priority.name }} </span>
+                            {% else %}
+                                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">  {{ evenement.priority.name }} </span>
+                            {% endif %}
+                        </td>
+                        <td class="px-4 py-3 text-sm border">{{ evenement.date | date('d M Y')}}</td>
+                        <td class="px-4 py-3 text-sm border">{{ evenement.createdAt | date('d M Y')}}</td>
+                        <td class="px-4 py-3 text-sm border">
+                            <div class="flex">
+                                <a class="flex-1" href="{{ path('evenement_show', {'id': evenement.id}) }}"><i class="fas fa-eye"></i></a>
+                                <a class="flex-1" href="{{ path('evenement_edit', {'id': evenement.id}) }}"><i class="far fa-edit"></i></a>
+                                {{ include('evenement/_delete_form.html.twig') }}
+                            </div>
+                        </td>
+                    </tr>
+                    {%  else  %}
+                    <tr class="text-gray-700">
+                        <td colspan="4" class="px-4 py-3 text-sm border"> Aucun Evènement trouvé</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+{% endblock %}

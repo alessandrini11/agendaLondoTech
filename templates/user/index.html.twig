@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <section class="container mx-auto p-6 font-mono">
+        <h1 class="text-3xl border-l-4 border-blue-500 pl-4 mb-3">Utilisateurs</h1>
+        <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+            <p class="my-5 flex justify-end">
+                <a class="p-1 px-3 bg-blue-500 text-gray-100 text-lg rounded-lg cursor-pointer focus:border-4 border-blue-300" href="{{ path('user_new') }}"><i class="fas fa-plus"></i></a>
+            </p>
+            <div class="w-full overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                    <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                        <th class="px-4 py-3">Nom</th>
+                        <th class="px-4 py-3">Email</th>
+                        <th class="px-4 py-3">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                    {% for user in users %}
+                        <tr class="text-gray-700">
+                            <td class="px-4 py-3 text-md font-semibold border">{{ user.nom }}</td>
+                            <td class="px-4 py-3 text-xs border">
+                                {{ user.email }}
+                            </td>
+                            <td class="px-4 py-3 text-sm border">
+                                <div class="flex justify-center">
+                                    <a class="" href="{{ path('user_edit', {'id': user.id}) }}"><i class="far fa-edit"></i></a>
+                                    {{ include('user/_delete_form.html.twig') }}
+                                </div>
+                            </td>
+                        </tr>
+                    {%  else  %}
+                        <tr class="text-gray-700">
+                            <td colspan="4" class="px-4 py-3 text-sm border"> Aucun Utilisateur trouvé</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+{% endblock %}

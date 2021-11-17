@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Evenement{% endblock %}
+
+{% block body %}
+<div class="w-11/12 mx-auto">
+    <div class="mx-auto mt-10">
+
+        <div class="px-10 py-2 border rounded mb-10 sm:w-1/2 mx-auto bg-white">
+            <h2 class="text-xl my-5 font-bold text-gray-600">Ajouter un Evenement</h2>
+            {{ include('evenement/_form.html.twig') }}
+            <a href="{{ path('evenement_index') }}">back to list</a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
